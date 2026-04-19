@@ -21,10 +21,9 @@ RUN chown -R www-data:www-data storage bootstrap/cache
 EXPOSE 10000
 
 CMD sed -i 's/80/10000/g' /etc/apache2/ports.conf /etc/apache2/sites-available/000-default.conf \
+ && php artisan migrate --force || true \
  && php artisan config:clear \
- && php artisan cache:clear \
  && php artisan route:clear \
  && php artisan view:clear \
  && php artisan config:cache \
- && php artisan migrate --force \
  && apache2-foreground

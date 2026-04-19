@@ -10,11 +10,16 @@ return new class extends Migration
     {
         Schema::create('activity_logs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('admin_id')->nullable()->constrained('admins')->onDelete('set null');
-            $table->string('action');         // e.g. "profile_updated", "password_changed"
-            $table->string('description');    // human-readable sentence
+            $table->unsignedBigInteger('admin_id')->nullable();
+            $table->string('action');
+            $table->string('description');
             $table->string('ip')->nullable();
             $table->timestamps();
+
+            $table->foreign('admin_id')
+                ->references('id')
+                ->on('admins')
+                ->nullOnDelete();
         });
     }
 

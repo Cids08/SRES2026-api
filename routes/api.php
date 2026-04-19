@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\AdminAuthController;
 use App\Http\Controllers\Api\StudentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\SettingsController;
+use App\Http\Controllers\Api\Admin\StatsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,11 +74,9 @@ Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
     // Auth
     Route::post('/logout', [AdminAuthController::class, 'logout']);
     Route::get('/me',      [AdminAuthController::class, 'me']);
-    Route::get('/stats',   [AdminAuthController::class, 'stats']);
+    Route::get('/stats', [StatsController::class, 'index']);
 
     // ── Profile ──────────────────────────────────────────────────────────
-    // FIX: was '/admin/profile' inside prefix('admin') → became /api/admin/admin/profile
-    // Correct: just '/profile' → resolves to /api/admin/profile
     Route::post('/profile',  [SettingsController::class, 'updateProfile']); // multipart photo upload
     Route::patch('/profile', [SettingsController::class, 'updateProfile']); // JSON name/email/bio
 

@@ -17,6 +17,7 @@ RUN a2enmod rewrite
 COPY render-apache.conf /etc/apache2/sites-available/000-default.conf
 
 RUN chown -R www-data:www-data storage bootstrap/cache
+RUN php artisan storage:link || true
 
 EXPOSE 10000
 

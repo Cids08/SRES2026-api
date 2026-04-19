@@ -57,6 +57,12 @@ Route::post('/admin/resend-otp',     [AdminAuthController::class, 'resendOtp']);
 Route::post('/admin/forgot-password', [SettingsController::class, 'forgotPassword']);
 Route::post('/admin/reset-password',  [SettingsController::class, 'resetPassword']);
 
+Route::get('/health', function () {
+    return response()->json([
+        'status' => 'ok'
+    ]);
+});
+
 /*
 |--------------------------------------------------------------------------
 | Admin Routes — PROTECTED (sanctum)
